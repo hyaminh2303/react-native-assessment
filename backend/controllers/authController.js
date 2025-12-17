@@ -8,29 +8,21 @@ import { syncOrderServiceConfig } from './goalController.js';
  */
 export const login = async (req, res) => {
   try {
-    console.log('Login request received');
-
     // Sync order service config (non-blocking)
     syncOrderServiceConfig().catch(err => {
       console.log('Order service sync failed (non-critical):', err.message);
     });
 
     const { email, password } = req.body;
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Users:', users);
 
     // Find user
     const user = users.find(u => u.email === email);
     if (!user) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
-    console.log('User found:', user);
+
     // Verify password
-    const hashedPassword = await bcrypt.hash(password, 10)
-    console.log('Hashed password:', hashedPassword);
     const isValidPassword = await bcrypt.compare(password, user.password);
-    console.log('Is valid password:', isValidPassword);
     if (!isValidPassword) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
