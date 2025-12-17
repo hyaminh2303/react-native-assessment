@@ -96,7 +96,7 @@ export default function HomeScreen({ navigation }: any) {
               {/* Statistics Section */}
               <View style={styles.statsSection}>
                 <Text style={styles.sectionTitle}>Your Progress</Text>
-                
+
                 <View style={styles.statsGrid}>
                   <View style={styles.statCard}>
                     <View style={[styles.statIcon, { backgroundColor: '#E3F2FD' }]}>
